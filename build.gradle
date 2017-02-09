@@ -9,13 +9,9 @@ subprojects {
         compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
         compile group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.1.0'
         compile group: 'com.google.guava', name: 'guava', version: '19.0'
+        compile group: 'io.netty', name: 'netty-all', version: '4.1.8.Final'
         compile group: 'junit', name: 'junit', version: '4.12'
-    }
-}
-
-project(':server') {
-    sourceSets {
-        main.java.srcDirs = ['src/main']
-        test.java.srcDirs = ['src/test']
+        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.22'
+        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.10'
     }
 }
