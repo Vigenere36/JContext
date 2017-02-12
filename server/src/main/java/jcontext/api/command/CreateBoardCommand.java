@@ -12,7 +12,7 @@ public class CreateBoardCommand implements Command {
     }
 
     @Override
-    public CommandType getType() {
+    public CommandType commandType() {
         return CommandType.CREATE_BOARD;
     }
 }

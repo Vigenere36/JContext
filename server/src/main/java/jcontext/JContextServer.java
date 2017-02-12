@@ -1,4 +1,4 @@
-package jcontext.core;
+package jcontext;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Guice;
@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import jcontext.api.command.CommandModule;
 import jcontext.connection.ServerConnectionModule;
-import jcontext.connection.ServerListener;
+import jcontext.connection.ServerConnectionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class JContextServer {
 
         // Initialize server listener
         try {
-            injector.getInstance(ServerListener.class).listen();
+            injector.getInstance(ServerConnectionListener.class).listen();
         } catch (InterruptedException e) {
             log.error("Server connection interrupted", e);
         }

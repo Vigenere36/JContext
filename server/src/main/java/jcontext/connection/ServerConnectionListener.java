@@ -7,14 +7,14 @@ import io.netty.channel.ChannelFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ServerListener {
-    private static final Logger log = LoggerFactory.getLogger(ServerListener.class);
+public class ServerConnectionListener {
+    private static final Logger log = LoggerFactory.getLogger(ServerConnectionListener.class);
 
     private final int serverPort;
     private final ServerBootstrap serverBootstrap;
 
     @Inject
-    ServerListener(@Named("server.port") int serverPort, ServerBootstrap serverBootstrap) {
+    ServerConnectionListener(@Named("server.port") int serverPort, ServerBootstrap serverBootstrap) {
         this.serverPort = serverPort;
         this.serverBootstrap = serverBootstrap;
     }

@@ -1,7 +1,8 @@
 package jcontext.api.handler;
 
 import jcontext.api.command.Command;
+import jcontext.api.response.Response;
 
 public interface CommandHandler {
-    void handle(Command command);
+    Response handle(Command command);
 }
