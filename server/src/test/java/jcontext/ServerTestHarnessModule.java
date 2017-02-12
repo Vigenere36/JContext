@@ -2,7 +2,6 @@ package jcontext;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -15,7 +14,7 @@ import java.net.SocketAddress;
 public class ServerTestHarnessModule extends AbstractModule {
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder().build(ServerTestChannelHandler.Factory.class));
+        bind(PredicatedResponseHandler.class).toInstance(new PredicatedResponseHandler());
     }
 
     @Provides
