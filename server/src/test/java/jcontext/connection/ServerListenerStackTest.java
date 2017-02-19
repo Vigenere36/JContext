@@ -8,14 +8,8 @@ import jcontext.api.command.CreateBoardCommand;
 import jcontext.api.response.ResponseType;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 public class ServerListenerStackTest {
-    private static final Logger log = LoggerFactory.getLogger(ServerListenerStackTest.class);
     private ServerTestHarness harness;
 
     @Before
@@ -25,8 +19,8 @@ public class ServerListenerStackTest {
     }
 
     @Test
-    public void testCreateBoard() throws InterruptedException, ExecutionException, TimeoutException {
+    public void testCreateBoard() throws InterruptedException {
         harness.send(new CreateBoardCommand("Ｒｅ：ゼロから始める異世界生活"),
-                response -> response.responseType() == ResponseType.ACK, 1000);
+                response -> response.responseType() == ResponseType.ACK);
     }
 }

@@ -28,12 +28,12 @@ class ApiDispatcher {
     }
 
     void handleCommand(Command command) {
-        log.info("Handling command of type {}", command.commandType().name());
+        log.debug("Handling command of type {}", command.commandType().name());
         Response response = commandHandlers.get(command.commandType()).handle(command);
 
         if (response != null) {
             responder.sendResponse(response);
-            log.info("Sent response of type {}", response.responseType().name());
+            log.debug("Sent response of type {}", response.responseType().name());
         }
     }
 }

@@ -37,17 +37,17 @@ public class ServerTestHarness {
         connectToServer();
     }
 
-    public void send(Command command) {
+    public Future<Response> send(Command command, Predicate<Response> predicate) throws InterruptedException {
         if (channel == null) throw new IllegalStateException("Connection not initialized");
-        channel.writeAndFlush(command);
+
+        Future<Response> future = responseHandler.expect(predicate);
+        send(command);
+        return future;
     }
 
-    public void send(Command command, Predicate<Response> predicate, long timeoutMillis) throws InterruptedException, ExecutionException, TimeoutException {
+    private void send(Command command) {
         if (channel == null) throw new IllegalStateException("Connection not initialized");
-
-        Future<Boolean> future = responseHandler.expect(predicate);
-        send(command);
-        future.get(timeoutMillis, TimeUnit.MILLISECONDS);
+        channel.writeAndFlush(command);
     }
 
     private void connectToServer() throws InterruptedException {

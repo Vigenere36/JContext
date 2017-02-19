@@ -2,9 +2,10 @@ package jcontext.api.command;
 
 import jcontext.api.handler.CommandHandler;
 import jcontext.api.handler.CreateBoardHandler;
+import jcontext.api.handler.TestHandler;
 
 public enum CommandType {
-    CREATE_BOARD(CreateBoardHandler.class);
+    CREATE_BOARD(CreateBoardHandler.class), TEST(TestHandler.class);
 
     private final Class<? extends CommandHandler> handlerClass;
 
