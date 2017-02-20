@@ -2,6 +2,7 @@ package jcontext.connection;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import jcontext.JContextModule;
 import jcontext.ServerTestHarness;
 import jcontext.ServerTestHarnessModule;
 import jcontext.api.command.CreateBoardCommand;

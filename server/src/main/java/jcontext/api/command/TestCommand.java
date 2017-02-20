@@ -1,8 +1,7 @@
 package jcontext.api.command;
 
+import lombok.Data;
+
+@Data
 public class TestCommand implements Command {
-    @Override
-    public CommandType commandType() {
-        return CommandType.TEST;
-    }
 }

@@ -1,21 +1,15 @@
 package jcontext.api.handler;
 
-import jcontext.api.command.Command;
 import jcontext.api.command.CreateBoardCommand;
 import jcontext.api.response.AckResponse;
 import jcontext.api.response.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-public class CreateBoardHandler implements CommandHandler {
-    private static final Logger log = LoggerFactory.getLogger(CreateBoardHandler.class);
-
+@Slf4j
+class CreateBoardHandler implements CommandHandler<CreateBoardCommand> {
     @Override
-    public Response handle(Command command) {
-        if (!(command instanceof CreateBoardCommand)) return null;
-        CreateBoardCommand createBoardCommand = (CreateBoardCommand) command;
-
-        log.info("Handling a create board command with title {}", createBoardCommand.getTitle());
+    public Response handle(CreateBoardCommand command) {
+        log.info("Handling a create board command with title {}", command.getTitle());
         return new AckResponse();
     }
 }

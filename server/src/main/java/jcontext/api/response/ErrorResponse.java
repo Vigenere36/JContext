@@ -3,9 +3,9 @@ package jcontext.api.response;
 import lombok.Data;
 
 @Data
-public class AckResponse implements Response {
+public class ErrorResponse implements Response{
     @Override
     public ResponseType responseType() {
-        return ResponseType.ACK;
+        return ResponseType.ERROR;
     }
 }

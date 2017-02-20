@@ -5,7 +5,7 @@ import com.google.inject.assistedinject.Assisted;
 import io.netty.channel.Channel;
 import jcontext.api.response.Response;
 
-class ServerConnectionResponder {
+public class ServerConnectionResponder {
     interface Factory {
         ServerConnectionResponder create(Channel channel);
     }

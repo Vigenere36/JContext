@@ -18,13 +18,12 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import jcontext.api.command.Command;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 
+@Slf4j
 public class ServerConnectionModule extends AbstractModule {
-    private static final Logger log = LoggerFactory.getLogger(ServerConnectionModule.class);
     public static final String SERVER_PORT = System.getProperty("server.port", "24443");
 
     @Override

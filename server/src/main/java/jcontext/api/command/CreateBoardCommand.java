@@ -1,18 +1,8 @@
 package jcontext.api.command;
 
+import lombok.Data;
+
+@Data
 public class CreateBoardCommand implements Command {
     private final String title;
-
-    public CreateBoardCommand(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public CommandType commandType() {
-        return CommandType.CREATE_BOARD;
-    }
 }

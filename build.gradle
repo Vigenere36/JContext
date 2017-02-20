@@ -6,15 +6,34 @@ subprojects {
     }
 
     dependencies {
+        // Yummy guava juice
         compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
         compile group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '4.1.0'
         compile group: 'com.google.inject.extensions', name: 'guice-assistedinject', version: '4.1.0'
         compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
+        // Libraries for specific tasks
         compile group: 'io.netty', name: 'netty-all', version: '4.1.8.Final'
         compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
+        // Logging
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.22'
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.10'
+
+        // Cleaner code
         compile group: 'com.jnape.palatable', name: 'lambda', version: '1.5.6'
+        compileOnly "org.projectlombok:lombok:1.16.14"
+
+        // Used to create bindings out of generics (e.g. map command -> handler, state -> dbHandler)
+        compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+
+        // Testing
+        compile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
         testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    test {
+        exclude '**/*StackTest*'
+        exclude '**/*LoadTest*'
     }
 }
