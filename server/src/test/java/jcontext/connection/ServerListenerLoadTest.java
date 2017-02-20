@@ -41,7 +41,7 @@ public class ServerListenerLoadTest {
         }
     }
 
-    private void sendFast(int iterations, boolean burst) throws InterruptedException {
+    private void sendFast(int iterations, boolean burst) throws InterruptedException, TimeoutException, ExecutionException {
         CountDownLatch latch = new CountDownLatch(iterations);
         TestCommand testCommand = new TestCommand();
 
@@ -52,7 +52,7 @@ public class ServerListenerLoadTest {
                 stat.end(tag);
                 latch.countDown();
                 return response.responseType() == ResponseType.ACK;
-            });
+            }, 200);
 
             if (!burst) Thread.sleep(0, 500);
         }

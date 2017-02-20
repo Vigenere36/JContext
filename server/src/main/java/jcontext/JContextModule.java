@@ -2,16 +2,10 @@ package jcontext;
 
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import jcontext.api.command.Command;
 import jcontext.api.handler.CommandHandler;
-import jcontext.connection.ApiDispatcher;
-import jcontext.connection.ServerConnectionModule;
-import jcontext.connection.ServerConnectionResponder;
-import jcontext.database.DbManager;
 import jcontext.database.StateDbHandler;
 import jcontext.state.StateObject;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +14,6 @@ import org.reflections.Reflections;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Set;
-
-import static org.mockito.Mockito.mock;
 
 @Slf4j
 public class JContextModule extends AbstractModule {
@@ -50,11 +42,5 @@ public class JContextModule extends AbstractModule {
                 handlersForType.addBinding((K) typeArgument).to(handler);
             });
         }));
-    }
-
-    public static void main(String[] args) {
-        Injector injector = Guice.createInjector(new ServerConnectionModule(), new JContextModule());
-        log.info("{}", injector.getInstance(DbManager.class));
-        log.info("{}", injector.getInstance(ApiDispatcher.Factory.class).create(mock(ServerConnectionResponder.class)));
     }
 }

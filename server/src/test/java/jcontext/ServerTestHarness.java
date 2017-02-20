@@ -37,12 +37,13 @@ public class ServerTestHarness {
         connectToServer();
     }
 
-    public Future<Response> send(Command command, Predicate<Response> predicate) throws InterruptedException {
+    public Response send(Command command, Predicate<Response> predicate, long timeoutMillis) throws InterruptedException, TimeoutException, ExecutionException {
         if (channel == null) throw new IllegalStateException("Connection not initialized");
 
         Future<Response> future = responseHandler.expect(predicate);
         send(command);
-        return future;
+
+        return future.get(timeoutMillis, TimeUnit.MILLISECONDS);
     }
 
     private void send(Command command) {
