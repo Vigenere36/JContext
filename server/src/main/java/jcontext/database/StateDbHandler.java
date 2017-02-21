@@ -1,11 +1,13 @@
 package jcontext.database;
 
-import jcontext.state.StateObject;
+import jcontext.state.State;
 
-public interface StateDbHandler<T extends StateObject> {
-    void insert(T state);
+import java.sql.Connection;
 
-    void update(T state);
+interface StateDbHandler<T extends State> {
+    void insert(T state, Connection connection);
 
-    void delete(T state);
+    void update(T state, Connection connection);
+
+    void delete(T state, Connection connection);
 }

@@ -6,18 +6,18 @@ import io.netty.channel.Channel;
 import jcontext.api.response.Response;
 
 public class ServerConnectionResponder {
-    interface Factory {
+    public interface Factory {
         ServerConnectionResponder create(Channel channel);
     }
 
     private final Channel channel;
 
     @Inject
-    ServerConnectionResponder(@Assisted Channel channel) {
+    public ServerConnectionResponder(@Assisted Channel channel) {
         this.channel = channel;
     }
 
-    void sendResponse(Response response) {
+    public void sendResponse(Response response) {
         channel.writeAndFlush(response);
     }
 }

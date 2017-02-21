@@ -1,24 +1,37 @@
 package jcontext.database;
 
 import com.google.inject.Inject;
-import jcontext.state.StateObject;
-import lombok.Data;
+import com.google.inject.name.Named;
+import jcontext.state.State;
+import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Map;
 
-@Data
+@Slf4j
 public class DbManager {
-    @Inject Map<Class<? extends StateObject>, StateDbHandler> dbHandlersForState;
+    private final Map<Class<? extends State>, StateDbHandler> dbHandlersForState;
+    private final Connection connection;
 
-    public void insert(StateObject state) {
-        dbHandlersForState.get(state.getClass()).insert(state);
+    @Inject DbManager(Map<Class<? extends State>, StateDbHandler> dbHandlersForState,
+                      @Named("dbConnection") String dbConnection) throws SQLException {
+        this.dbHandlersForState = dbHandlersForState;
+        this.connection = DriverManager.getConnection(dbConnection);
+
+        log.info("Initiated db connection with {}", dbConnection);
     }
 
-    public void update(StateObject state) {
-        dbHandlersForState.get(state.getClass()).update(state);
+    public void insert(State state) {
+        dbHandlersForState.get(state.getClass()).insert(state, connection);
     }
 
-    public void delete(StateObject state) {
-        dbHandlersForState.get(state.getClass()).delete(state);
+    public void update(State state) {
+        dbHandlersForState.get(state.getClass()).update(state, connection);
+    }
+
+    public void delete(State state) {
+        dbHandlersForState.get(state.getClass()).delete(state, connection);
     }
 }
