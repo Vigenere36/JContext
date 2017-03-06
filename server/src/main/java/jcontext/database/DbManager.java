@@ -5,6 +5,7 @@ import com.google.inject.name.Named;
 import jcontext.state.State;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,11 +17,14 @@ public class DbManager {
     private final Connection connection;
 
     @Inject DbManager(Map<Class<? extends State>, StateDbHandler> dbHandlersForState,
-                      @Named("dbConnection") String dbConnection) throws SQLException {
+                      @Named("dbConnection") String dbConnection,
+                      DbMigration dbMigration) throws SQLException, IOException {
         this.dbHandlersForState = dbHandlersForState;
         this.connection = DriverManager.getConnection(dbConnection);
 
         log.info("Initiated db connection with {}", dbConnection);
+
+        dbMigration.migrateIfNeeded(connection);
     }
 
     public void insert(State state) {

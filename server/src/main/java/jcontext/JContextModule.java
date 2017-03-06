@@ -13,6 +13,9 @@ import jcontext.connection.ServerConnectionModule;
 import jcontext.database.DbHandlerModule;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -40,7 +43,7 @@ public class JContextModule extends AbstractModule {
     }
 
     /**
-     * Holy shit it actually works, don't try this at home
+     * I wouldn't recommend doing this in real production code
      * Used to automatically map a command->command handler, state->state db handler, etc
      */
     public static <K, V> void createMapBindingForHandlers(TypeLiteral<K> typeClass,
