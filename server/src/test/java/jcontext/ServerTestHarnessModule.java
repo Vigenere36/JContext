@@ -6,7 +6,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import jcontext.connection.ServerConnectionModule;
+import jcontext.connection.ConnectionModule;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -28,6 +28,6 @@ public class ServerTestHarnessModule extends AbstractModule {
 
     @Provides
     public SocketAddress getServerAddress() {
-        return new InetSocketAddress("localhost", Integer.parseInt(ServerConnectionModule.SERVER_PORT));
+        return new InetSocketAddress("localhost", Integer.parseInt(ConnectionModule.SERVER_PORT));
     }
 }

@@ -7,20 +7,22 @@ import io.netty.channel.ChannelFuture;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ServerConnectionListener {
+class ServerConnection implements Connection {
     private final int serverPort;
     private final ServerBootstrap serverBootstrap;
 
     @Inject
-    ServerConnectionListener(@Named("server.port") int serverPort, ServerBootstrap serverBootstrap) {
+    ServerConnection(@Named("server.port") int serverPort,
+                     @Named("serverBootstrap") ServerBootstrap serverBootstrap) {
         this.serverPort = serverPort;
         this.serverBootstrap = serverBootstrap;
     }
 
-    public void listen() throws InterruptedException {
+    @Override
+    public ChannelFuture listen() throws InterruptedException {
         ChannelFuture future = serverBootstrap.bind(serverPort).sync();
 
         log.info("Listening for incoming connections on port {}", serverPort);
-        future.channel().closeFuture().sync();
+        return future.channel().closeFuture();
     }
 }

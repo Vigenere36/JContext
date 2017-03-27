@@ -9,13 +9,10 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.name.Named;
 import jcontext.api.handler.CommandHandlerModule;
-import jcontext.connection.ServerConnectionModule;
+import jcontext.connection.ConnectionModule;
 import jcontext.database.DbHandlerModule;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -31,7 +28,7 @@ public class JContextModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new ServerConnectionModule());
+        install(new ConnectionModule());
         install(new CommandHandlerModule());
         install(new DbHandlerModule());
     }

@@ -1,31 +1,31 @@
-package jcontext.api.handler;
+package jcontext.connection;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import jcontext.api.command.Command;
+import jcontext.api.handler.CommandHandler;
 import jcontext.api.response.Response;
-import jcontext.connection.ServerConnectionResponder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
 @Slf4j
-public class ApiDispatcher {
+class ApiDispatcher {
     private final Map<Class<? extends Command>, CommandHandler> commandHandlers;
-    private final ServerConnectionResponder responder;
+    private final ConnectionResponder responder;
 
-    public interface Factory {
-        ApiDispatcher create(ServerConnectionResponder responder);
+    interface Factory {
+        ApiDispatcher create(ConnectionResponder responder);
     }
 
     @Inject
-    public ApiDispatcher(Map<Class<? extends Command>, CommandHandler> commandHandlers,
-                  @Assisted ServerConnectionResponder responder) {
+    ApiDispatcher(Map<Class<? extends Command>, CommandHandler> commandHandlers,
+                  @Assisted ConnectionResponder responder) {
         this.commandHandlers = commandHandlers;
         this.responder = responder;
     }
 
-    public void handleCommand(Command command) {
+    void handleCommand(Command command) {
         log.debug("Handling command of type {}", command.getClass());
         Response response = commandHandlers.get(command.getClass()).handle(command);
 
